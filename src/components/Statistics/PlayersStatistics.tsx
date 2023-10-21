@@ -1,44 +1,19 @@
-import { useState, useEffect } from 'react'
-import { getPlayersApi } from '../../api/players'
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import { useGetPlayers } from './Hooks/usePlayer'
+import { PlayerStatisticsTable } from './Tables'
 
 /**
- * Fetches and renders the statistics of players.
- *
- * @returns A React component that renders the statistics.
+ * Renders the players statistics component.
+ * 
+ * @returns {JSX.Element} The rendered players statistics component.
  */
 export function PlayersStatistics (): JSX.Element {
-  const [players, setPlayers] = useState<Player[]>([])
-
-  useEffect(() => {
-    async function fetchPlayers () {
-      const players = await getPlayersApi()
-      setPlayers(players)
-    }
-
-    fetchPlayers()
-  }, [])
+  // Retrieve the players data using the useGetPlayers hook
+  const players = useGetPlayers()
 
   return (
     <div>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Username</TableCell>
-            <TableCell>Wins</TableCell>
-            <TableCell>Losses</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {players.map(player => (
-            <TableRow key={player.id}>
-              <TableCell>{player.username}</TableCell>
-              <TableCell>{player.estadisticas?.wins}</TableCell>
-              <TableCell>{player.estadisticas?.losses}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <h1>Statistics</h1>
+      <PlayerStatisticsTable players={players} />
     </div>
   )
 }
