@@ -1,4 +1,4 @@
-import { BASE_API } from '../utils/constants'
+import { BASE_API } from './utils/constants'
 
 /**
  * Retrieves the players from the API.
