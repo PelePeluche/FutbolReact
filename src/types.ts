@@ -10,6 +10,6 @@ type Player = {
 	first_name: string
 	last_name: string
 	avatar: string | null
-	estadisticas: Record<string, any> | null
+	statistics: Record<string, any> | null
 	[key: string]: any
 }
